@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="frame-content">
+  <main class="dashboard-page">
+    <section class="dashboard-panel" id="beranda">
+      <header class="hero">
+        <div>
+          <p class="kicker">Kopi, sarapan, dan waktu yang tidak terburu-buru</p>
+          <h1>Mulai hari dengan cara yang <em>lebih pelan.</em></h1>
+          <p class="intro">Kedai kecil di sudut Btp. Kami menyeduh kopi dari biji lokal, memasak menu sarapan setiap pagi, lalu membiarkan sisanya berjalan seperti biasa.</p>
+          <a class="button" href="#menu">Lihat menu hari ini</a>
+        </div>
+        <div class="hero-image" role="img" aria-label="Barista sedang menyiapkan kopi">
+          <p>“Tidak ada yang perlu dikejar sebelum kopi pertama.”</p>
+        </div>
+      </header>
+    </section>
+
+    <section class="dashboard-panel section" id="cerita">
+      <div class="section-title"><h2>Tempat untuk <em>berhenti</em> sebentar</h2><span>01 / cerita</span></div>
+      <div class="about">
+        <blockquote class="pullquote">“Kami ingin rasanya seperti bertamu ke rumah teman yang pandai memasak.”</blockquote>
+        <div class="about-copy">
+          <p>Kafe Djomok dimulai dari meja kayu di garasi rumah. Sekarang mejanya bertambah, tapi kebiasaannya tidak banyak berubah: roti keluar dari oven pukul tujuh, kopi diseduh satu per satu, dan siapa pun boleh duduk lama.</p>
+          <p>Kalau sedang mampir, coba sapa orang di balik bar. Mereka biasanya punya rekomendasi yang lebih jujur daripada papan menu.</p>
+          <h3>Pilihan sarapan</h3>
+          <ul>
+            <li>Roti panggang telur</li>
+            <li>Nasi goreng merah</li>
+            <li>Kopi gula aren</li>
+          </ul>
+          <h3>Urutan menikmati pagi</h3>
+          <ol>
+            <li>Pilih tempat duduk.</li>
+            <li>Pesan menu favorit.</li>
+            <li>Nikmati kopi tanpa terburu-buru.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-panel section" id="menu">
+      <div class="section-title"><h2>Yang keluar dari <em>dapur</em></h2><span>02 / menu</span></div>
+      <div class="menu-layout">
+        <div class="menu-list">
+          <article class="menu-item"><div><h3>Kopi gula aren</h3><p>Espresso, susu segar, gula aren Aseli Sulawesi</p></div><strong>13K</strong></article>
+          <article class="menu-item"><div><h3>Roti panggang telur</h3><p>Sourdough, telur setengah matang, sambal matah</p></div><strong>25K</strong></article>
+          <article class="menu-item"><div><h3>Nasi Goreng Merah</h3><p>Nasi hangat, jamur tiram, telur mata sapi</p></div><strong>35K</strong></article>
+          <article class="menu-item"><div><h3>Es Teh Panas</h3><p>Teh panas dengan es</p></div><strong>8K</strong></article>
+        </div>
+        <aside class="hours"><h3>Jam buka</h3><table>
+          <tr><td>Senin–Jumat</td><td>07.00–20.00</td></tr>
+          <tr><td>Sabtu</td><td>07.00–22.00</td></tr>
+          <tr><td>Minggu</td><td>08.00–23.00</td></tr>
+        </table><p style="font-size:12px;color:#a99c91;">Menu sarapan tersedia sampai pukul 11.00.</p></aside>
+      </div>
+    </section>
+
+    <section class="dashboard-panel section" id="ruang">
+      <div class="section-title"><h2>Lihat-lihat <em>ruangnya</em></h2><span>03 / suasana</span></div>
+      <div class="photo-row">
+        <figure><img src="../assets/jendela.jpg" alt="Meja kayu di dalam kafe Djomok"><figcaption>Meja dekat jendela, paling ramai menjelang siang.</figcaption></figure>
+        <figure><img src="../assets/baca.jpg" alt="Cangkir kopi di atas meja"><figcaption>Sudut kecil untuk membaca atau tidak melakukan apa-apa.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="dashboard-panel section" id="reservasi">
+      <div class="section-title"><h2>Simpan satu meja untuk <em>nanti</em></h2><span>04 / reservasi</span></div>
+      <div class="booking">
+        <div class="booking-info"><p>ingin memesan meja? isi form reservasi di bawah.</p></div>
+        <form id="reservationForm">
+          <div class="form-row"><label for="name">Nama<input id="name" name="name" type="text" placeholder="Nama kamu" required></label><label for="phone">Nomor WhatsApp<input id="phone" name="phone" type="tel" placeholder="08xx..." required></label></div>
+          <div class="form-row"><label for="date">Tanggal<input id="date" name="date" type="date" required></label><label for="guests">Jumlah orang<select id="guests" name="guests"><option>solo</option><option>2 orang</option><option>3 orang</option><option>4 orang</option><option>5 orang atau lebih</option></select></label></div>
+          <label for="note">Catatan (opsional)<textarea id="note" name="note" placeholder="Misalnya: ingin meja dekat jendela"></textarea></label>
+          <button class="button" type="submit">Kirim permintaan</button><p class="form-status" id="formStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script>
+    const panels = document.querySelectorAll(".dashboard-panel");
+    const sidebarLinks = () => {
+      try {
+        return parent.frames.sidebarFrame.document.querySelectorAll(".side nav a");
+      } catch (error) {
+        return [];
+      }
+    };
+
+    function showPanel() {
+      const activeId = window.location.hash.slice(1) || "beranda";
+      panels.forEach((panel) => {
+        panel.hidden = panel.id !== activeId;
+      });
+      sidebarLinks().forEach((link) => {
+        link.classList.toggle("active", link.hash.slice(1) === activeId);
+      });
+    }
+
+    window.addEventListener("hashchange", showPanel);
+    showPanel();
+
+    document.querySelector("#reservationForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      document.querySelector("#formStatus").textContent =
+        `Siap, ${form.elements.name.value.trim()}. Kami catat untuk ${form.elements.guests.value}. Sampai ketemu di Kafe Djomok.`;
+      form.reset();
+    });
+  </script>
+</body>
+</html>

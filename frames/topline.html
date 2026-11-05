@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="frame-topline">
+  <div class="topline">
+    <span>Ngopi rek — <time id="currentDate" datetime=""></time></span>
+    <a href="mailto:desutora71@gmail.com">desutora71@gmail.com</a>
+  </div>
+  <script>
+    const today = new Date();
+    const currentDate = document.querySelector("#currentDate");
+    currentDate.textContent = new Intl.DateTimeFormat("id-ID", {
+      day: "2-digit", month: "long", year: "numeric"
+    }).format(today);
+    currentDate.dateTime = today.toISOString().split("T")[0];
+  </script>
+</body>
+</html>
