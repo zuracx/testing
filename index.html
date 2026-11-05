@@ -20,12 +20,18 @@
 </frameset>
 <script>
   const layout = document.querySelector("frameset");
+  const contentLayout = layout.querySelector("frameset");
+  const mobileScreen = window.matchMedia("(max-width: 700px)");
 
   function resizeFrames() {
-    layout.cols = window.innerWidth <= 700 ? "0,*" : "220,*";
+    const isMobile = mobileScreen.matches;
+    layout.setAttribute("cols", isMobile ? "0,*" : "220,*");
+    contentLayout.setAttribute("rows", isMobile ? "0,*,70" : "52,*,70");
   }
 
   resizeFrames();
+  mobileScreen.addEventListener("change", resizeFrames);
   window.addEventListener("resize", resizeFrames);
+  window.addEventListener("orientationchange", resizeFrames);
 </script>
 </html>

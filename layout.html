@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kafe Djomok — Kopi & Sarapan</title>
+  <style>
+    :root {
+      --espresso: #2d241f;
+      --paper: #fffdf9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .site-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      height: 100vh;
+    }
+
+    .main-layout {
+      display: grid;
+      grid-template-rows: 52px minmax(0, 1fr) 70px;
+      min-width: 0;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      border: 0;
+    }
+
+    .sidebar-frame {
+      height: 100%;
+      background: var(--espresso);
+    }
+
+    .topline-frame,
+    .content-frame,
+    .footer-frame {
+      min-height: 0;
+    }
+
+    @media (max-width: 700px) {
+      .site-layout {
+        display: block;
+      }
+
+      .sidebar-frame,
+      .topline-frame {
+        display: none;
+      }
+
+      .main-layout {
+        grid-template-rows: minmax(0, 1fr) 70px;
+        height: 100vh;
+      }
+
+      .content-frame {
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-layout">
+    <iframe class="sidebar-frame" src="frames/sidebar.html" name="sidebarFrame" title="Sidebar navigasi"></iframe>
+    <div class="main-layout">
+      <iframe class="topline-frame" src="frames/topline.html" name="toplineFrame" title="Informasi kafe"></iframe>
+      <iframe class="content-frame" src="frames/content.html#beranda" name="mainFrame" title="Konten utama"></iframe>
+      <iframe class="footer-frame" src="frames/footer.html" name="footerFrame" title="Footer"></iframe>
+    </div>
+  </div>
+</body>
+</html>
