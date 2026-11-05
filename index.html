@@ -26,7 +26,7 @@
   function resizeFrames() {
     const isMobile = mobileScreen.matches;
     layout.setAttribute("cols", isMobile ? "0,*" : "220,*");
-    contentLayout.setAttribute("rows", isMobile ? "0,*,70" : "52,*,70");
+    contentLayout.setAttribute("rows", isMobile ? "0,*,0" : "52,*,70");
   }
 
   resizeFrames();

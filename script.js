@@ -11,6 +11,8 @@ function resizeParentFrameset() {
     const parentLayout = parent.document.querySelector("frameset");
     if (parentLayout) {
       parentLayout.setAttribute("cols", mobileScreen.matches ? "0,*" : "220,*");
+      const contentLayout = parentLayout.querySelector("frameset");
+      contentLayout.setAttribute("rows", mobileScreen.matches ? "0,*,0" : "52,*,70");
     }
   } catch {
     // The content can also be opened directly outside the frameset.
