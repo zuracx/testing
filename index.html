@@ -18,4 +18,14 @@
     </body>
   </noframes>
 </frameset>
+<script>
+  const layout = document.querySelector("frameset");
+
+  function resizeFrames() {
+    layout.cols = window.innerWidth <= 700 ? "0,*" : "220,*";
+  }
+
+  resizeFrames();
+  window.addEventListener("resize", resizeFrames);
+</script>
 </html>

@@ -1,53 +1,35 @@
-const componentError = document.getElementById("componentError");
-const componentSlots = document.querySelectorAll("[data-component]");
+const panels = document.querySelectorAll(".dashboard-panel");
+const reservationForm = document.querySelector("#reservationForm");
+const formStatus = document.querySelector("#formStatus");
 
-async function loadComponents() {
-  await Promise.all(
-    [...componentSlots].map(async (slot) => {
-      const response = await fetch(slot.dataset.component);
-      if (!response.ok) {
-        throw new Error(`Komponen gagal dimuat: ${slot.dataset.component}`);
-      }
-      slot.outerHTML = await response.text();
-    })
-  );
+function getSidebarLinks() {
+  try {
+    return parent.frames.sidebarFrame.document.querySelectorAll(".side nav a");
+  } catch {
+    return [];
+  }
 }
 
-function initializePage() {
-  const form = document.querySelector("#reservationForm");
-  const status = document.querySelector("#formStatus");
-  const backToTop = document.querySelector("#backToTop");
-  const currentDate = document.querySelector("#currentDate");
-  const today = new Date();
-  const formattedDate = new Intl.DateTimeFormat("id-ID", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric"
-  }).format(today);
+function showPanel() {
+  const activeId = window.location.hash.slice(1) || "beranda";
 
-  currentDate.textContent = formattedDate;
-  currentDate.dateTime = today.toISOString().split("T")[0];
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const name = form.elements.name.value.trim();
-    const guests = form.elements.guests.value;
-    status.textContent = `Siap, ${name}. Kami catat untuk ${guests}. Sampai ketemu di Kafe Djomok.`;
-    form.reset();
+  panels.forEach((panel) => {
+    panel.hidden = panel.id !== activeId;
   });
 
-  window.addEventListener("scroll", () => {
-    backToTop.classList.toggle("visible", window.scrollY > 400);
-  });
-
-  backToTop.addEventListener("click", () => {
-    document.querySelector("#beranda").scrollIntoView({ behavior: "smooth" });
+  getSidebarLinks().forEach((link) => {
+    link.classList.toggle("active", link.hash.slice(1) === activeId);
   });
 }
 
-loadComponents()
-  .then(initializePage)
-  .catch((error) => {
-    console.error(error);
-    componentError.hidden = false;
-  });
+window.addEventListener("hashchange", showPanel);
+showPanel();
+
+reservationForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const name = reservationForm.elements.name.value.trim();
+  const guests = reservationForm.elements.guests.value;
+  formStatus.textContent = `Oke, ${name}. Meja untuk ${guests} orang kami catat.`;
+  reservationForm.reset();
+});

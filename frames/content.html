@@ -27,18 +27,13 @@
         <div class="about-copy">
           <p>Kafe Djomok dimulai dari meja kayu di garasi rumah. Sekarang mejanya bertambah, tapi kebiasaannya tidak banyak berubah: roti keluar dari oven pukul tujuh, kopi diseduh satu per satu, dan siapa pun boleh duduk lama.</p>
           <p>Kalau sedang mampir, coba sapa orang di balik bar. Mereka biasanya punya rekomendasi yang lebih jujur daripada papan menu.</p>
-          <h3>Pilihan sarapan</h3>
-          <ul>
+          <h3>Favorit pagi</h3>
+          <ul class="story-list">
             <li>Roti panggang telur</li>
             <li>Nasi goreng merah</li>
             <li>Kopi gula aren</li>
           </ul>
-          <h3>Urutan menikmati pagi</h3>
-          <ol>
-            <li>Pilih tempat duduk.</li>
-            <li>Pesan menu favorit.</li>
-            <li>Nikmati kopi tanpa terburu-buru.</li>
-          </ol>
+          <p>Datang sendiri atau bersama teman, pilih tempat duduk yang nyaman, lalu pesan sesuatu yang ingin kamu nikmati.</p>
         </div>
       </div>
     </section>
@@ -52,11 +47,17 @@
           <article class="menu-item"><div><h3>Nasi Goreng Merah</h3><p>Nasi hangat, jamur tiram, telur mata sapi</p></div><strong>35K</strong></article>
           <article class="menu-item"><div><h3>Es Teh Panas</h3><p>Teh panas dengan es</p></div><strong>8K</strong></article>
         </div>
-        <aside class="hours"><h3>Jam buka</h3><table>
-          <tr><td>Senin–Jumat</td><td>07.00–20.00</td></tr>
-          <tr><td>Sabtu</td><td>07.00–22.00</td></tr>
-          <tr><td>Minggu</td><td>08.00–23.00</td></tr>
-        </table><p style="font-size:12px;color:#a99c91;">Menu sarapan tersedia sampai pukul 11.00.</p></aside>
+        <aside class="hours">
+          <h3>Jam buka</h3>
+          <table>
+            <tbody>
+              <tr><td>Senin–Jumat</td><td>07.00–20.00</td></tr>
+              <tr><td>Sabtu</td><td>07.00–22.00</td></tr>
+              <tr><td>Minggu</td><td>08.00–23.00</td></tr>
+            </tbody>
+          </table>
+          <p class="hours-note">Menu sarapan tersedia sampai pukul 11.00.</p>
+        </aside>
       </div>
     </section>
 
@@ -71,7 +72,7 @@
     <section class="dashboard-panel section" id="reservasi">
       <div class="section-title"><h2>Simpan satu meja untuk <em>nanti</em></h2><span>04 / reservasi</span></div>
       <div class="booking">
-        <div class="booking-info"><p>ingin memesan meja? isi form reservasi di bawah.</p></div>
+        <div class="booking-info"><p>Mau mampir? Isi form di bawah supaya kami bisa menyiapkan mejanya.</p></div>
         <form id="reservationForm">
           <div class="form-row"><label for="name">Nama<input id="name" name="name" type="text" placeholder="Nama kamu" required></label><label for="phone">Nomor WhatsApp<input id="phone" name="phone" type="tel" placeholder="08xx..." required></label></div>
           <div class="form-row"><label for="date">Tanggal<input id="date" name="date" type="date" required></label><label for="guests">Jumlah orang<select id="guests" name="guests"><option>solo</option><option>2 orang</option><option>3 orang</option><option>4 orang</option><option>5 orang atau lebih</option></select></label></div>
@@ -81,36 +82,6 @@
       </div>
     </section>
   </main>
-  <script>
-    const panels = document.querySelectorAll(".dashboard-panel");
-    const sidebarLinks = () => {
-      try {
-        return parent.frames.sidebarFrame.document.querySelectorAll(".side nav a");
-      } catch (error) {
-        return [];
-      }
-    };
-
-    function showPanel() {
-      const activeId = window.location.hash.slice(1) || "beranda";
-      panels.forEach((panel) => {
-        panel.hidden = panel.id !== activeId;
-      });
-      sidebarLinks().forEach((link) => {
-        link.classList.toggle("active", link.hash.slice(1) === activeId);
-      });
-    }
-
-    window.addEventListener("hashchange", showPanel);
-    showPanel();
-
-    document.querySelector("#reservationForm").addEventListener("submit", (event) => {
-      event.preventDefault();
-      const form = event.currentTarget;
-      document.querySelector("#formStatus").textContent =
-        `Siap, ${form.elements.name.value.trim()}. Kami catat untuk ${form.elements.guests.value}. Sampai ketemu di Kafe Djomok.`;
-      form.reset();
-    });
-  </script>
+  <script src="../script.js"></script>
 </body>
 </html>
